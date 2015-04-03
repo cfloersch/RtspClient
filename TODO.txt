@@ -1,0 +1,5 @@
+
+
+At some point I should create an InternetMail header parser provider. Once done I
+would have the bulk of the mime package done and could create its own little
+project.

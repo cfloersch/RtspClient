@@ -1,0 +1,145 @@
+OPTIONS rtsp://10.103.32.109:5001/AAA01.sdp RTSP/1.0
+CSeq: 2
+User-Agent: MMP/2.0 (MSIE 8.0; Windows NT 6.1)
+
+RTSP/1.0 200 OK
+Server: DSS/6.0.3 (Build/526.3; Platform/Linux; Release/Darwin Streaming Server; State/Development; )
+Cseq: 2
+Public: DESCRIBE, SETUP, TEARDOWN, PLAY, PAUSE, OPTIONS, ANNOUNCE, RECORD
+
+
+DESCRIBE rtsp://10.103.32.109:5001/AAA01.sdp RTSP/1.0
+CSeq: 3
+User-Agent: MMP/2.0 (MSIE 8.0; Windows NT 6.1)
+Accept: application/sdp
+
+RTSP/1.0 200 OK
+Server: DSS/6.0.3 (Build/526.3; Platform/Linux; Release/Darwin Streaming Server; State/Development; )
+Cseq: 3
+Cache-Control: no-cache
+Content-length: 667
+Date: Thu, 12 Apr 2012 14:38:22 GMT
+Expires: Thu, 12 Apr 2012 14:38:22 GMT
+Content-Type: application/sdp
+x-Accept-Retransmit: our-retransmit
+x-Accept-Dynamic-Rate: 1
+Content-Base: rtsp://10.103.32.109:5001/AAA01.sdp/
+
+v=0
+o=RTSP 2285599416 34 IN IP4 172.16.10.1
+s=Lane 1
+c=IN IP4 0.0.0.0
+t=0 0
+a=charset:Shift_JIS
+a=range:npt=0-
+a=control:*
+a=source-filter:incl IN IP4 239.128.1.1 172.16.10.1
+a=control:*
+m=video 0 RTP/AVP 98
+b=AS:0
+a=3GPP-Adaptation-Support:1
+a=rtpmap:98 H264/30000
+a=control:trackID=2
+a=fmtp:98 packetization-mode=1; profile-level-id=42801f; sprop-parameter-sets=J0KAH9oFh8Q=,KM48gA==
+m=audio 0 RTP/AVP 97
+a=3GPP-Adaptation-Support:1
+a=control:trackID=5
+a=rtpmap:97 mpeg4-generic/8000/2
+a=fmtp:97 streamtype=5; profile-level-id=15; mode=AAC-hbr; config=1410;SizeLength=13; IndexLength=3; IndexDeltaLength=3; CTSDeltaLength=0; DTSDeltaLength=0;
+
+
+SETUP rtsp://10.103.32.109:5001/AAA01.sdp/trackID=2 RTSP/1.0
+CSeq: 4
+User-Agent: MMP/2.0 (MSIE 8.0; Windows NT 6.1)
+Transport: RTP/AVP/TCP;unicast;interleaved=0-1
+
+RTSP/1.0 200 OK
+Server: DSS/6.0.3 (Build/526.3; Platform/Linux; Release/Darwin Streaming Server; State/Development; )
+Cseq: 4
+Cache-Control: no-cache
+Session: 1725261236621418257
+Date: Thu, 12 Apr 2012 14:38:22 GMT
+Expires: Thu, 12 Apr 2012 14:38:22 GMT
+Transport: RTP/AVP/TCP;unicast;interleaved=0-1
+
+
+SETUP rtsp://10.103.32.109:5001/AAA01.sdp/trackID=5 RTSP/1.0
+CSeq: 5
+User-Agent: MMP/2.0 (MSIE 8.0; Windows NT 6.1)
+Transport: RTP/AVP/TCP;unicast;interleaved=2-3
+
+RTSP/1.0 200 OK
+Server: DSS/6.0.3 (Build/526.3; Platform/Linux; Release/Darwin Streaming Server; State/Development; )
+Cseq: 5
+Cache-Control: no-cache
+Session: 2550172378129330791
+Date: Thu, 12 Apr 2012 14:38:22 GMT
+Expires: Thu, 12 Apr 2012 14:38:22 GMT
+Transport: RTP/AVP/TCP;unicast;interleaved=2-3
+
+
+PLAY rtsp://10.103.32.109:5001/AAA01.sdp/ RTSP/1.0
+CSeq: 6
+User-Agent: MMP/2.0 (MSIE 8.0; Windows NT 6.1)
+Session: 1725261236621418257
+Range: npt=0.000-
+
+RTSP/1.0 200 OK
+Server: DSS/6.0.3 (Build/526.3; Platform/Linux; Release/Darwin Streaming Server; State/Development; )
+Cseq: 6
+Session: 1725261236621418257
+Range: npt=now-
+RTP-Info: url=rtsp://10.103.32.109:5001/AAA01.sdp/trackID=2
+
+
+PLAY rtsp://10.103.32.109:5001/AAA01.sdp/ RTSP/1.0
+CSeq: 7
+User-Agent: MMP/2.0 (MSIE 8.0; Windows NT 6.1)
+Session: 2550172378129330791
+Range: npt=0.000-
+
+RTSP/1.0 200 OK
+Server: DSS/6.0.3 (Build/526.3; Platform/Linux; Release/Darwin Streaming Server; State/Development; )
+Cseq: 7
+Session: 2550172378129330791
+Range: npt=now-
+RTP-Info: url=rtsp://10.103.32.109:5001/AAA01.sdp/trackID=5
+
+
+
+
+
+
+PAUSE rtsp://10.103.32.109:5001/AAA01.sdp/ RTSP/1.0
+CSeq: 8
+User-Agent: MMP/2.0 (MSIE 8.0; Windows NT 6.1)
+Session: 7894277263700355824
+
+RTSP/1.0 200 OK
+Server: DSS/6.0.3 (Build/526.3; Platform/Linux; Release/Darwin Streaming Server; State/Development; )
+Cseq: 8
+Session: 7894277263700355824
+
+
+
+
+TEARDOWN rtsp://10.103.32.109:5001/AAA01.sdp/ RTSP/1.0
+CSeq: 8
+User-Agent: MMP/2.0 (MSIE 8.0; Windows NT 6.1)
+Session: 2550172378129330791
+
+RTSP/1.0 200 OK
+Server: DSS/6.0.3 (Build/526.3; Platform/Linux; Release/Darwin Streaming Server; State/Development; )
+Cseq: 8
+Session: 2550172378129330791
+
+
+TEARDOWN rtsp://10.103.32.109:5001/AAA01.sdp/ RTSP/1.0
+CSeq: 9
+User-Agent: MMP/2.0 (MSIE 8.0; Windows NT 6.1)
+Session: 1725261236621418257
+
+RTSP/1.0 200 OK
+Server: DSS/6.0.3 (Build/526.3; Platform/Linux; Release/Darwin Streaming Server; State/Development; )
+Cseq: 9
+Session: 1725261236621418257
