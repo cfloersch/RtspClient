@@ -46,7 +46,7 @@ RtspPlayer player = new RtspPlayer(client, new MediaConsumer() {
    {
       Consumer<ByteBuffer> handler = channels.get(channelId);
       if(handler == null)  System.out.println(String.format("Received packet on unknown channel %d", channelId));
-      handler.apply(data);
+      else handler.apply(data);
    }
 
    @Override
