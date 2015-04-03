@@ -7,6 +7,7 @@ is extensible so customization is possible.
 
 Example;
 
+````
 RtspClient client = new RtspClient();
 RtspPlayer player = new RtspPlayer(client, new MediaConsumer() {
 
@@ -75,3 +76,4 @@ assertEquals(RtspState.Stopping, player.getState());
 client.await();
 assertEquals(RtspState.Stopped, player.getState());
 
+````
