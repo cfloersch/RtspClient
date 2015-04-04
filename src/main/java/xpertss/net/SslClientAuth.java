@@ -1,8 +1,7 @@
 /**
- * Created by IntelliJ IDEA.
- * User: cfloersch
+ * Copyright XpertSoftware All rights reserved.
+ *
  * Date: 2/26/11 11:25 AM
- * Copyright XpertSoftware. All rights reserved.
  */
 package xpertss.net;
 

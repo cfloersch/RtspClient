@@ -1,8 +1,7 @@
 /**
- * Created by IntelliJ IDEA.
- * User: cfloersch
+ * Copyright XpertSoftware All rights reserved.
+ *
  * Date: 4/6/11 2:50 PM
- * Copyright Manheim online
  */
 package xpertss.mime;
 
@@ -11,12 +10,10 @@ import xpertss.function.Predicates;
 import xpertss.lang.Integers;
 import xpertss.lang.Objects;
 import xpertss.lang.Strings;
-import xpertss.util.Iterables;
 import xpertss.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 

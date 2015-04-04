@@ -1,8 +1,6 @@
 /**
  * Copyright XpertSoftware All rights reserved.
- * All rights reserved.
  *
- * User: floersh
  * Date: Aug 12, 2007
  * Time: 11:33:54 PM
  */

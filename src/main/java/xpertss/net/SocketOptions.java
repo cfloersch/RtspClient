@@ -1,7 +1,7 @@
 /**
- * Created By: cfloersch
+ * Copyright XpertSoftware All rights reserved.
+ *
  * Date: 4/3/2015
- * Copyright 2013 XpertSoftware
  */
 package xpertss.net;
 

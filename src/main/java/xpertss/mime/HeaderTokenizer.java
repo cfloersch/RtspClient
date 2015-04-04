@@ -1,4 +1,6 @@
 /*
+ * Copyright XpertSoftware All rights reserved.
+ *
  * Created on Mar 6, 2006
  */
 package xpertss.mime;
