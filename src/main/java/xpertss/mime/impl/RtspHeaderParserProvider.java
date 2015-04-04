@@ -47,7 +47,7 @@ public class RtspHeaderParserProvider implements HeaderParserProvider {
       parsers.put("REFERER",              new SimpleHeaderParser("Referer", Header.Type.Request));       // yes the spec has this mis-spelled
       parsers.put("RETRY-AFTER",          new SimpleHeaderParser("Retry-After", Header.Type.Response));
       parsers.put("REQUIRE",              new SimpleHeaderParser("Require", Header.Type.Request));
-      parsers.put("RTP-INFO",             new ComplexHeaderParser("RTP-Info", Header.Type.Response));  // TODO Should be ComplexHeaderParser
+      parsers.put("RTP-INFO",             new ComplexHeaderParser("RTP-Info", Header.Type.Response));
       parsers.put("SCALE",                new SimpleHeaderParser("Scale", Header.Type.General));
       parsers.put("SPEED",                new SimpleHeaderParser("Speed", Header.Type.General));
       parsers.put("SERVER",               new SimpleHeaderParser("Server", Header.Type.Response));
