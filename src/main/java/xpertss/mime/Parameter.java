@@ -6,18 +6,22 @@
 package xpertss.mime;
 
 /**
- * TODO Java docs should be consume here about named parameters
+ * This class holds a MIME parameter (attribute-value pair) as defined in RFC-2231.
+ * <p/>
+ * Parameters may be either simple or named. A simple parameter will have a {@code null}
+ * name.
  */
 public interface Parameter {
 
 
    /**
-    * Returns the parameter name as a String.
+    * Returns the parameter name as a String or {@code null} if this is a simple
+    * parameter.
     */
    public String getName();
 
    /**
-    * Returns the parameter value as a String or null if no value was defined.
+    * Returns the parameter value as a String.
     */
    public String getValue();
 

@@ -5,15 +5,16 @@
  */
 package xpertss.mime.impl;
 
+import xpertss.lang.Strings;
 import xpertss.mime.HeaderValue;
 import xpertss.mime.Parameter;
 import xpertss.lang.Objects;
 
 public class NamedHeaderValue implements HeaderValue {
 
-   private String name;
-   private String value;
-   private Parameter[] params;
+   private final String name;
+   private final String value;
+   private final Parameter[] params;
 
    public NamedHeaderValue(String name, String value, Parameter[] params)
    {
@@ -48,14 +49,14 @@ public class NamedHeaderValue implements HeaderValue {
    public Parameter getParameter(String name)
    {
       for(Parameter param : params) {
-         if(name.equalsIgnoreCase(param.getName())) return param;
+         if(Strings.equalIgnoreCase(name, param.getName())) return param;
       }
       return null;
    }
 
    public String toString()
    {
-      StringBuffer buf = new StringBuffer(getName()).append("=").append(value);
+      StringBuilder buf = new StringBuilder(getName()).append("=").append(value);
       for(Parameter param : params) {
          buf.append("; ").append(param.toString());
       }

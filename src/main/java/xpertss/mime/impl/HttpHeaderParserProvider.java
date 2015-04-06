@@ -7,8 +7,6 @@ package xpertss.mime.impl;
 
 import xpertss.mime.Header;
 import xpertss.mime.HeaderParser;
-import xpertss.mime.impl.ComplexHeaderParser;
-import xpertss.mime.impl.SimpleHeaderParser;
 import xpertss.mime.spi.HeaderParserProvider;
 
 import java.util.HashMap;
@@ -33,7 +31,7 @@ import java.util.Map;
  */
 public class HttpHeaderParserProvider implements HeaderParserProvider {
 
-   private Map<String,HeaderParser> parsers = new HashMap<String,HeaderParser>();
+   private Map<String,HeaderParser> parsers = new HashMap<>();
 
    public HttpHeaderParserProvider()
    {

@@ -11,14 +11,13 @@ import xpertss.mime.spi.HeaderParserProvider;
 import java.util.ServiceLoader;
 
 /**
- * This will parse the headers enough to determine the header name. It
- * will use that to load an appropriate parser from the service provider
- * framework for the header name. It will then delegate the parsing to
- * that provider.
- * <p>
- * TODO Improve the above documentation
+ * HeaderParser will parse MIME headers into Header objects.
  * <p/>
- * TODO Need to figure out this provider thing a bit better.
+ * This utilizes a ServiceProvider framework where a parser for each header
+ * is loaded to actually parse the header contents. This class simply parses
+ * the header name so that it may be used to locate a suitable value parser.
+ *
+ * @see xpertss.mime.spi.HeaderParserProvider
  */
 public abstract class HeaderParser {
 
@@ -29,13 +28,12 @@ public abstract class HeaderParser {
 
 
    /**
-    * Parse a raw header and return an appropriate Header objects
-    * representation.
+    * Parse a raw header and return an appropriate Header object representation.
     *
     * @param raw The raw header string from a request or response
     * @return A header object instance
     * @throws MalformedException If the header was malformed or incomplete
-    * @throws NullPointerException If the raw header is null
+    * @throws NullPointerException If the raw header is {@code null}
     */
    public static Header parse(CharSequence raw) throws MalformedException
    {
@@ -50,31 +48,38 @@ public abstract class HeaderParser {
    }
 
    /**
-    * Parse the given header value for the specified header name and
-    * return an appropriate Header objects representation.
+    * Parse the given header value for the specified header name and return an
+    * appropriate Header objects representation.
     *
     * @param name The name of the header
-    * @param raw A string representing the raw value to be parsed
+    * @param rawValue A string representing the raw value to be parsed
     * @return A header object instance
     * @throws MalformedException If the header value was malformed or incomplete
-    * @throws NullPointerException If either the header or raw values are null
+    * @throws NullPointerException If either the header or rawValue values are {@code null}
     */
-   public static Header parse(String name, CharSequence raw) throws MalformedException
+   public static Header parse(String name, CharSequence rawValue) throws MalformedException
    {
       if(name == null) throw new NullPointerException("name can not be null");
-      if(raw == null) throw new NullPointerException("raw can not be null");
+      if(rawValue == null) throw new NullPointerException("rawValue can not be null");
       HeaderParser parser = defProvider.create(name);
-      if(parser != null) return parser.doParse(raw);
+      if(parser != null) return parser.doParse(rawValue);
       // revert to the service providers.
       for(HeaderParserProvider provider: loader) {
          parser = provider.create(name);
-         if(parser != null) return parser.doParse(raw);
+         if(parser != null) return parser.doParse(rawValue);
       }
-      return new RawHeader(name, raw); // default to a RawHeader as nothing knows how to parse it
+      return new RawHeader(name, rawValue); // default to a RawHeader as nothing knows how to parse it
    }
 
 
-
+   /**
+    * Service provider implementations should implement this method to parse a
+    * raw header value into a Header object.
+    *
+    * @param raw The raw header value to parse.
+    * @return A header object representing the parsed header value
+    * @throws MalformedException If the header value was malformed or incomplete
+    */
    protected abstract Header doParse(CharSequence raw) throws MalformedException;
 
    private static class RawHeader implements Header {

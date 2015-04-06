@@ -5,15 +5,16 @@
  */
 package xpertss.mime.impl;
 
+import xpertss.lang.Strings;
 import xpertss.mime.Header;
 import xpertss.mime.HeaderValue;
 import xpertss.lang.Objects;
 
 public class ComplexValueHeader implements Header {
 
-   private String name;
-   private Type type;
-   private HeaderValue[] values;
+   private final String name;
+   private final Type type;
+   private final HeaderValue[] values;
 
    public ComplexValueHeader(String name, Type type, HeaderValue[] values)
    {
@@ -29,7 +30,7 @@ public class ComplexValueHeader implements Header {
 
    public String getValue()
    {
-      StringBuffer buf = new StringBuffer();
+      StringBuilder buf = new StringBuilder();
       for(HeaderValue value : values) {
          if(buf.length() > 0) buf.append(", ");
          buf.append(value.toString());
@@ -54,16 +55,14 @@ public class ComplexValueHeader implements Header {
 
    public HeaderValue getValue(String name)
    {
-      if(name == null) throw new NullPointerException("name may not be null");
-      for(HeaderValue value : values) if(name.equalsIgnoreCase(value.getName())) return value;
+      for(HeaderValue value : values)
+         if(Strings.equalIgnoreCase(name, value.getName())) return value;
       return null;
    }
 
    public String toString()
    {
-      StringBuffer buf = new StringBuffer(getName());
-      buf.append(": ").append(getValue());
-      return buf.toString();
+      return String.format("%s: %s", getName(), getValue());
    }
 
 }

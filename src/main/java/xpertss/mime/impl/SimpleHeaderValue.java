@@ -5,14 +5,15 @@
  */
 package xpertss.mime.impl;
 
+import xpertss.lang.Strings;
 import xpertss.mime.HeaderValue;
 import xpertss.mime.Parameter;
 import xpertss.lang.Objects;
 
 public class SimpleHeaderValue implements HeaderValue {
 
-   private String value;
-   private Parameter[] params;
+   private final Parameter[] params;
+   private final String value;
 
    public SimpleHeaderValue(String value, Parameter[] params)
    {
@@ -47,14 +48,14 @@ public class SimpleHeaderValue implements HeaderValue {
    public Parameter getParameter(String name)
    {
       for(Parameter param : params) {
-         if(name.equalsIgnoreCase(param.getName())) return param;
+         if(Strings.equalIgnoreCase(name, param.getName())) return param;
       }
       return null;
    }
 
    public String toString()
    {
-      StringBuffer buf = new StringBuffer(value);
+      StringBuilder buf = new StringBuilder(value);
       for(Parameter param : params) {
          buf.append("; ").append(param.toString());
       }

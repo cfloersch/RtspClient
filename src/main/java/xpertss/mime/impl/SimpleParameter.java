@@ -10,8 +10,8 @@ import xpertss.mime.Parameter;
 
 public class SimpleParameter implements Parameter {
 
-   private String name;
-   private String value;
+   private final String name;
+   private final String value;
 
    public SimpleParameter(String name, String value)
    {

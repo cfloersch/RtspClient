@@ -23,7 +23,7 @@ import static xpertss.mime.HeaderTokenizer.MIME;
  * by a comma. This may include both named and unnamed parts.
  * <pre>
  *    Range: npt=0.000-
- *    RTP-Info: url=rtsp://stream.manheim.com:999/AVAIL.sdp/trackID=2,url=rtsp://stream.manheim.com:999/AVAIL.sdp/trackID=5
+ *    RTP-Info: url=rtsp://stream.foo.com/AVAIL.sdp/trackID=2,url=rtsp://stream.foo.com/AVAIL.sdp/trackID=5
  *    Public: DESCRIBE, SETUP, TEARDOWN, PLAY, PAUSE, OPTIONS, ANNOUNCE, RECORD
  *    If-Match: "etag1", "etag2", "etag3"
  *    Accept: text/plain; q=0.5, text/html, text/x-dvi; q=0.8, text/x-c
@@ -31,8 +31,8 @@ import static xpertss.mime.HeaderTokenizer.MIME;
  */
 public class ComplexHeaderParser extends ParameterizedHeaderParser {
 
-   private String name;
-   private Header.Type type;
+   private final Header.Type type;
+   private final String name;
 
    protected ComplexHeaderParser(String name, Header.Type type)
    {
@@ -46,9 +46,9 @@ public class ComplexHeaderParser extends ParameterizedHeaderParser {
       throws MalformedException
    {
       HeaderTokenizer h = new HeaderTokenizer(raw, MIME);
-      List<HeaderValue> values = new ArrayList<HeaderValue>();
-      List<String> parts = new ArrayList<String>();
-      StringBuffer buf = new StringBuffer();
+      List<HeaderValue> values = new ArrayList<>();
+      List<String> parts = new ArrayList<>();
+      StringBuilder buf = new StringBuilder();
       boolean complete = false;
 
       // First break them up into individual value pairs

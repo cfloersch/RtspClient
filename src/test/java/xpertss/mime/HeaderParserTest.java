@@ -11,6 +11,9 @@ public class HeaderParserTest {
    public void testTransport()
    {
       Header header = HeaderParser.parse("Transport", "RTP/AVP/TCP;unicast;interleaved=0-1");
+      assertNotNull(header.getValue(0));
+      assertNotNull(header.getValue(0).getParameter("interleaved"));
+      assertEquals("unicast", header.getValue(0).getParameter(0).getValue());
    }
 
    @Test

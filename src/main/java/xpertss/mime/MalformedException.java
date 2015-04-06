@@ -5,10 +5,18 @@
  */
 package xpertss.mime;
 
+/**
+ * Thrown to indicate that a header was Malformed and could not be parsed.
+ */
 public class MalformedException extends RuntimeException {
 
+
+   /**
+    * No message constructor.
+    */
    public MalformedException()
    {
+      super();
    }
 
    public MalformedException(String message)

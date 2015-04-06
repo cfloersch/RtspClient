@@ -16,7 +16,7 @@ public abstract class ParameterizedHeaderParser extends HeaderParser {
    protected Parameter doParameter(String rawParam) throws MalformedException
    {
       HeaderTokenizer h = new HeaderTokenizer(rawParam, HeaderTokenizer.MIME);
-      StringBuffer buf = new StringBuffer();
+      StringBuilder buf = new StringBuilder();
       String name = null, value = null;
       boolean quoted = false;
       while(true) {

@@ -49,12 +49,12 @@ public class Utils {
    }
 
 
-   public static String trimAndClear(StringBuffer buf)
+   public static String trimAndClear(StringBuilder buf)
    {
       return getAndClear(buf).trim();
    }
 
-   public static String getAndClear(StringBuffer buf)
+   public static String getAndClear(StringBuilder buf)
    {
       try {
          return buf.toString();

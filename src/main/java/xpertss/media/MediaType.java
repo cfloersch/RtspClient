@@ -3,10 +3,11 @@ package xpertss.media;
 import xpertss.sdp.MediaDescription;
 
 /**
+ * An Enumeration of Standard SDP Media Types.
  */
 public enum MediaType {
 
-   Audio, Video;
+   Audio, Video, Text, Application, Message;
 
 
    public static MediaType parse(MediaDescription desc)

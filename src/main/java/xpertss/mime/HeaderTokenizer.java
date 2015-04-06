@@ -8,12 +8,11 @@ package xpertss.mime;
 import xpertss.lang.Objects;
 
 /**
- * This class tokenizes RFC822 and MIME headers into the basic
- * symbols specified by RFC822 and MIME.
+ * This class tokenizes RFC822 and MIME headers into the basic symbols specified
+ * by RFC822 and MIME.
  * <p/>
- * This class handles folded headers (ie headers with embedded
- * CRLF SPACE sequences). The folds are removed in the returned
- * tokens.
+ * This class handles folded headers (ie headers with embedded CRLF SPACE sequences).
+ * The folds are removed in the returned tokens.
  *
  * @author cfloersch
  */
@@ -187,7 +186,7 @@ public class HeaderTokenizer {
     * tokens until an EOF Token is returned.
     *
     * @return the next Token
-    * @throws java.text.ParseException if the parse fails
+    * @throws MalformedException if the parse fails
     */
    public Token next() throws MalformedException
    {
@@ -205,7 +204,7 @@ public class HeaderTokenizer {
     * called. <p>
     *
     * @return the next Token
-    * @throws java.text.ParseException if the parse fails
+    * @throws MalformedException if the parse fails
     */
    public Token peek() throws MalformedException
    {

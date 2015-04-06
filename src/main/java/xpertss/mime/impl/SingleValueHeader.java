@@ -11,9 +11,9 @@ import xpertss.lang.Objects;
 
 public class SingleValueHeader implements Header {
 
-   private Type type;
-   private String name;
-   private HeaderValue[] value;
+   private final Type type;
+   private final String name;
+   private final HeaderValue[] value;
 
    public SingleValueHeader(String name, Type type, HeaderValue value)
    {
@@ -49,15 +49,12 @@ public class SingleValueHeader implements Header {
 
    public HeaderValue getValue(String name)
    {
-      if(name == null) throw new NullPointerException("name may not be null");
       return null;
    }
 
    public String toString()
    {
-      StringBuffer buf = new StringBuffer(getName());
-      buf.append(": ").append(getValue());
-      return buf.toString();
+      return String.format("%s: %s", getName(), getValue());
    }
 
 }

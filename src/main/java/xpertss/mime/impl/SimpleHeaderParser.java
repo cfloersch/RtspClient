@@ -26,10 +26,10 @@ import static xpertss.mime.HeaderTokenizer.Token;
  */
 public class SimpleHeaderParser extends ParameterizedHeaderParser {
 
-   private String name;
-   private Header.Type type;
+   private final Header.Type type;
+   private final String name;
 
-   public SimpleHeaderParser(String name, Header.Type type)
+   protected SimpleHeaderParser(String name, Header.Type type)
    {
       this.name = Objects.notNull(name, "name");
       this.type = Objects.notNull(type, "type");
@@ -42,7 +42,7 @@ public class SimpleHeaderParser extends ParameterizedHeaderParser {
    {
       HeaderTokenizer h = new HeaderTokenizer(raw, MIME);
       List<String> parts = new ArrayList<String>();
-      StringBuffer buf = new StringBuffer();
+      StringBuilder buf = new StringBuilder();
       boolean complete = false;
 
       while(!complete) {

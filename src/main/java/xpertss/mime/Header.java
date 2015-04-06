@@ -7,7 +7,7 @@ package xpertss.mime;
 
 /**
  * Represents a Mime header field.
- * <p>
+ * <p/>
  * The Mime header fields follow the format defined by Section 3.1 of RFC 822.
  * Each header field consists of a name followed by a colon (":") and the field
  * value. Field names are case-insensitive. The field value MAY be preceded by
@@ -21,10 +21,10 @@ package xpertss.mime;
  *                      and consisting of either *TEXT or combinations
  *                      of token, separators, and quoted-string&gt;
  *</pre><p>
- * A Header may represent a single value or multiple values. Each value may
- * be either named or simple. Additionally, each value may or may not have
- * associated parameters which themselves may be named or not. This interface
- * attempts to define a means to access all of the various header parts.
+ * A Header may represent a single value or multiple values. Each value may be
+ * either named or simple. Additionally, each value may or may not have associated
+ * parameters which themselves may be named or not. This interface attempts to
+ * define a means to access all of the various header parts.
  */
 public interface Header {
 

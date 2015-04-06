@@ -8,10 +8,11 @@ package xpertss.mime.impl;
 import xpertss.mime.Parameter;
 import xpertss.lang.Objects;
 
+// TODO Must a quoted parameter be a name/value pair or could it be simply a value??
 public class QuotedParameter implements Parameter {
 
-   private String name;
-   private String value;
+   private final String name;
+   private final String value;
 
    public QuotedParameter(String name, String value)
    {

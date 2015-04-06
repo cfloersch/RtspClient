@@ -24,8 +24,8 @@ package xpertss.mime;
  * <p><pre>
  *    Cache-Control: private, max-age=0
  * </pre><p>
- * In the example the simple header value will have a null name field and the
- * value field will have the value private. The named value will have a name
+ * In the example the simple header value will have a {@code null} name field and
+ * the value field will have the value private. The named value will have a name
  * field of max-age and a value field of 0.
  *
  */
@@ -33,7 +33,8 @@ public interface HeaderValue {
 
 
    /**
-    * Ths will return the value's name or null if it is not a named value.
+    * Ths will return the value's name or {@code null} if it is not a
+    * named value.
     */
    public String getName();
 

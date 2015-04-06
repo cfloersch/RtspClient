@@ -19,20 +19,16 @@ import java.util.NoSuchElementException;
 
 
 /**
- * Headers is a utility class that manages RFC822 style src.
+ * Headers is a utility class that manages RFC822 style headers.
  * <p/>
- * <hr> <strong>A note on RFC822 and MIME src</strong><p>
+ * <hr> <strong>A note on RFC822 and MIME headers</strong><p>
  * <p/>
  * RFC822 and MIME header fields <strong>must</strong> contain only
  * US-ASCII characters. If a header contains non US-ASCII characters,
  * it must be encoded as per the rules in RFC 2047. Callers of the
  * <code>setHeader</code> and <code>addHeader</code> methods are
  * responsible for enforcing the MIME requirements for the specified
- * src.  In addition, these header fields must be folded (wrapped)
- * before being sent if they exceed the line length limitation for the
- * transport (1000 bytes for SMTP).  Received src may have been
- * folded.  The application is responsible for folding and unfolding
- * src as appropriate.
+ * header.
  */
 public class Headers {
 
