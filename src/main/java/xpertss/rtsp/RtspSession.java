@@ -417,9 +417,12 @@ public class RtspSession implements NioSession, DataHandler, ConnectHandler, Che
    public void shutdown(Exception ex)
    {
       NIOUtils.close(channel);
-      if(ex == null) handler.onClose(this);
-      else handler.onFailure(this, ex);
-      readyState = Closed;
+      try {
+         if (ex == null) handler.onClose(this);
+         else handler.onFailure(this, ex);
+      } finally {
+         readyState = Closed;
+      }
    }
 
 

@@ -359,7 +359,7 @@ public class Headers {
    public static Headers create(List<String> raw)
    {
       List<Header> headers = new ArrayList<Header>();
-      StringBuffer header = new StringBuffer();
+      StringBuilder header = new StringBuilder();
       for(int i = raw.size() - 1; i >= 0; i--) {
          header.insert(0, raw.get(i));
          if(!Utils.isWhiteSpace(header.charAt(0))) {

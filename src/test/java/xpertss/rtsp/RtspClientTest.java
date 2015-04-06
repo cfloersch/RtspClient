@@ -8,8 +8,8 @@ import xpertss.media.MediaConsumer;
 import xpertss.media.MediaType;
 import xpertss.sdp.MediaDescription;
 import xpertss.sdp.SessionDescription;
-import xpertss.threads.Threads;
 
+import java.io.IOException;
 import java.net.ConnectException;
 import java.net.URI;
 import java.net.UnknownHostException;
@@ -20,7 +20,6 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.same;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;

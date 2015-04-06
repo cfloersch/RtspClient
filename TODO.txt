@@ -1,5 +1,3 @@
-Modify the HeaderParser to ONLY use service provider impls. Get rid of the concept
-of a default provider. Implement an HTTP provider, an InternetMail provider, and a
-RTSP provider. Since RTSP and HTTP are very very similar the headers from RTSP that
-are not part of HTTP should be the only ones implemented in the RTSP provider impl
-and the remaining should be part of the HTTP provider.
+Implement an RtspProducer class which does the RTSP ANNOUNCE and
+RTSP RECORD process.
+

@@ -5,7 +5,6 @@
  */
 package xpertss.mime;
 
-import xpertss.mime.impl.RtspHeaderParserProvider;
 import xpertss.mime.spi.HeaderParserProvider;
 
 import java.util.ServiceLoader;
@@ -23,8 +22,6 @@ public abstract class HeaderParser {
 
    private static ServiceLoader<HeaderParserProvider> loader =
          ServiceLoader.load(HeaderParserProvider.class, HeaderParserProvider.class.getClassLoader());
-
-   private static HeaderParserProvider defProvider = new RtspHeaderParserProvider();
 
 
    /**
@@ -61,11 +58,9 @@ public abstract class HeaderParser {
    {
       if(name == null) throw new NullPointerException("name can not be null");
       if(rawValue == null) throw new NullPointerException("rawValue can not be null");
-      HeaderParser parser = defProvider.create(name);
-      if(parser != null) return parser.doParse(rawValue);
       // revert to the service providers.
       for(HeaderParserProvider provider: loader) {
-         parser = provider.create(name);
+         HeaderParser parser = provider.create(name);
          if(parser != null) return parser.doParse(rawValue);
       }
       return new RawHeader(name, rawValue); // default to a RawHeader as nothing knows how to parse it

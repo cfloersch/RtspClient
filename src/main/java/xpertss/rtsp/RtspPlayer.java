@@ -276,7 +276,7 @@ public class RtspPlayer {
 
 
       @Override
-      public void onData(RtspSession session, int channelId, ByteBuffer data)
+      public void onData(RtspSession session, int channelId, ByteBuffer data) throws IOException
       {
          consumer.consume(channelId, data);
       }
