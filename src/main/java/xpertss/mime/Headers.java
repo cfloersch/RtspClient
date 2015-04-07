@@ -47,17 +47,18 @@ public class Headers {
       if (Type.Mail == type) {
          headers.add(new PositionHeader("Return-Path"));
          headers.add(new PositionHeader("Received"));
-         headers.add(new PositionHeader("Message-Id"));
+         headers.add(new PositionHeader("Message-ID"));
          headers.add(new PositionHeader("Resent-Date"));
          headers.add(new PositionHeader("Date"));
          headers.add(new PositionHeader("Resent-From"));
          headers.add(new PositionHeader("From"));
+         headers.add(new PositionHeader("Sender"));
          headers.add(new PositionHeader("Reply-To"));
          headers.add(new PositionHeader("To"));
          headers.add(new PositionHeader("Subject"));
          headers.add(new PositionHeader("Cc"));
          headers.add(new PositionHeader("In-Reply-To"));
-         headers.add(new PositionHeader("Resent-Message-Id"));
+         headers.add(new PositionHeader("Resent-Message-ID"));
          headers.add(new PositionHeader("Errors-To"));
          headers.add(new PositionHeader("Mime-Version"));
          headers.add(new PositionHeader("Content-Type"));
