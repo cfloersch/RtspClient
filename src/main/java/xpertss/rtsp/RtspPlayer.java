@@ -1,5 +1,6 @@
 package xpertss.rtsp;
 
+import xpertss.SourceException;
 import xpertss.lang.Numbers;
 import xpertss.lang.Objects;
 import xpertss.lang.Range;
@@ -11,7 +12,6 @@ import xpertss.net.SocketOptions;
 import xpertss.sdp.MediaDescription;
 import xpertss.sdp.SessionDescription;
 import xpertss.sdp.SessionParser;
-import xpertss.utils.Utils;
 
 import java.io.IOException;
 import java.net.ProtocolException;
@@ -53,6 +53,7 @@ public class RtspPlayer {
 
 
 
+
    public void setConnectTimeout(int connectTimeout)
    {
       this.connectTimeout = Numbers.gte(0, connectTimeout, "connectTimeout must not be negative");
@@ -65,6 +66,7 @@ public class RtspPlayer {
 
 
 
+
    public void setReadTimeout(int readTimeout)
    {
       this.readTimeout = Numbers.gte(0, readTimeout, "readTimeout must not be negative");
@@ -74,6 +76,7 @@ public class RtspPlayer {
    {
       return readTimeout;
    }
+
 
 
 
@@ -105,7 +108,7 @@ public class RtspPlayer {
 
          SocketOptions.set(session, SO_TIMEOUT, readTimeout);
 
-         session.connect(Utils.maxIfZero(connectTimeout));
+         session.connect(connectTimeout);
       }
    }
 
@@ -159,6 +162,7 @@ public class RtspPlayer {
          headers.setHeader("Connection", "close");
          session.execute(request, new DefaultResponseHandler() {
             @Override public void onOkResponse(RtspSession session, RtspResponse response) throws IOException {
+               consumer.destroyChannels();
                session.close();
             }
          });
@@ -187,7 +191,7 @@ public class RtspPlayer {
          RtspRequest request = Setup.createRequest(target);
          Headers headers = request.getHeaders();
 
-         Range<Integer> channels = channel.getChannels();
+         final Range<Integer> channels = channel.getChannels();
          headers.setHeader("Transport", String.format(TRANSPORT,
                                                       channels.getLower(),
                                                       channels.getUpper()));
@@ -196,7 +200,7 @@ public class RtspPlayer {
          session.execute(request, new DefaultResponseHandler() {
             @Override
             public void onOkResponse(RtspSession session, RtspResponse response) throws IOException {
-               consumer.newChannel(channel);
+               consumer.createChannel(channel);
                sessionId = Headers.toString(response.getHeaders().getHeader("Session"));
                setupChannel(session);
             }
@@ -248,7 +252,7 @@ public class RtspPlayer {
                   if(Objects.isEmpty(medias)) throw new ProtocolException("nothing to play");
                   channels.clear();
                   for(int i = 0; i < medias.length; i++) {
-                     channels.add(new MediaChannel(medias[i], new Range<>(i*2, i*2+1)));
+                     channels.add(new MediaChannel(medias[i], new Range<>(i * 2, i * 2 + 1)));
                   }
 
                   setupChannel(session);
@@ -289,7 +293,8 @@ public class RtspPlayer {
    private static class DefaultResponseHandler implements RtspResponseHandler {
 
       @Override public void onResponse(RtspSession session, RtspResponse response) throws IOException {
-         if(response.getStatus() != Ok) throw new ProtocolException("unexpected response from server");
+         if(response.getStatus() != Ok)
+            throw new SourceException(response.getStatus().getCode(), response.getStatusReason());
          onOkResponse(session, response);
       }
 

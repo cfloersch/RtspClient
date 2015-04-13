@@ -8,8 +8,8 @@ import xpertss.media.MediaConsumer;
 import xpertss.media.MediaType;
 import xpertss.sdp.MediaDescription;
 import xpertss.sdp.SessionDescription;
+import xpertss.threads.Threads;
 
-import java.io.IOException;
 import java.net.ConnectException;
 import java.net.URI;
 import java.net.UnknownHostException;
@@ -112,7 +112,7 @@ public class RtspClientTest {
          }
 
          @Override
-         public void newChannel(MediaChannel channel)
+         public void createChannel(MediaChannel channel)
          {
             final MediaType type = channel.getType();
             Range<Integer> range = channel.getChannels();
@@ -131,6 +131,13 @@ public class RtspClientTest {
                   System.out.println(String.format("%s - RTP Sender Report Received", type.name()));
                }
             });
+         }
+
+         @Override
+         public void destroyChannels()
+         {
+            System.out.println("destroy called");
+            channels.clear();
          }
 
          @Override

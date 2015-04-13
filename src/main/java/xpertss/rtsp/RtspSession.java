@@ -201,7 +201,7 @@ public class RtspSession implements NioSession, DataHandler, ConnectHandler, Che
    public <T> RtspSession setOption(SocketOption<T> option, T value) throws IOException
    {
       if(option == SO_TIMEOUT) {
-         this.readTimeout = Numbers.gte(0, (Integer) value, "timeout must not be negative");
+         this.readTimeout = Utils.maxIfZero(Numbers.gte(0, (Integer) value, "timeout must not be negative"));
       } else if(channel.supportedOptions().contains(option)) {
          channel.setOption(option, value);
       }

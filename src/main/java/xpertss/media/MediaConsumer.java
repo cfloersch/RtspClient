@@ -4,7 +4,6 @@ import xpertss.sdp.MediaDescription;
 import xpertss.sdp.SessionDescription;
 
 import java.nio.ByteBuffer;
-import java.util.SortedSet;
 
 /**
  * A media consumer is responsible for interfacing with an RtspPlayer and
@@ -19,13 +18,22 @@ public interface MediaConsumer {
     */
    public MediaDescription[] select(SessionDescription sdp);
 
+
    /**
     * For each media description desired this will be called by the
     * player to inform it that the channel has been successfully
     * setup and to identify the channel identifiers associated with
     * it.
     */
-   public void newChannel(MediaChannel channel);
+   public void createChannel(MediaChannel channel);
+
+   /**
+    * Called to indicate that the previously created channels should
+    * be destroyed as they are no longer valid.
+    */
+   public void destroyChannels();
+
+
 
    /**
     * Once playback has begun the actual channel data will be delivered
@@ -34,6 +42,11 @@ public interface MediaConsumer {
     */
    public void consume(int channelId, ByteBuffer data);
 
+
+   /**
+    * Called to notify the consumer of an error that has terminated
+    * playback.
+    */
    public void handle(Throwable t);
 
 }
