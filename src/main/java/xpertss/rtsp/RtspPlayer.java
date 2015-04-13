@@ -183,7 +183,7 @@ public class RtspPlayer {
    private void setupChannel(RtspSession session) throws IOException
    {
       final MediaChannel channel = channels.pollFirst();
-      if(channel == null) {
+      if(channel == null && !Strings.isEmpty(sessionId)) {
          startPlayback(session);
       } else {
          String control = channel.getControl();
