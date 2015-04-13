@@ -249,7 +249,7 @@ public class RtspPlayer {
                   sessionDescription = parser.parse(response.getEntityBody());
 
                   MediaDescription[] medias = consumer.select(sessionDescription);
-                  if(Objects.isEmpty(medias)) throw new ProtocolException("nothing to play");
+                  if(Objects.isEmpty(medias)) throw new ProtocolException("missing media resource");
                   channels.clear();
                   for(int i = 0; i < medias.length; i++) {
                      channels.add(new MediaChannel(medias[i], new Range<>(i * 2, i * 2 + 1)));
