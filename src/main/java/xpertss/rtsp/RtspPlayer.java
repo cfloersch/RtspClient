@@ -36,7 +36,7 @@ public class RtspPlayer {
 
    private SessionDescription sessionDescription;
 
-   private volatile RtspState state;
+   private volatile RtspState state = Stopped;
    private RtspSession session;
    private int connectTimeout;
    private String sessionId;
@@ -102,7 +102,7 @@ public class RtspPlayer {
     */
    public void start(URI uri)
    {
-      if(state != Stopped) {
+      if(state == Stopped) {
          state = Activating;
          session = client.open(new RtspPlaybackHandler(), uri);
 
