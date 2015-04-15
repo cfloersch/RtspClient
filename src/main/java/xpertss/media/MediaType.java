@@ -17,6 +17,12 @@ public enum MediaType {
          return Audio;
       } else if("Video".equalsIgnoreCase(mediaType)) {
          return Video;
+      } else if("Text".equalsIgnoreCase(mediaType)) {
+         return Text;
+      } else if("Application".equalsIgnoreCase(mediaType)) {
+         return Application;
+      } else if("Message".equalsIgnoreCase(mediaType)) {
+         return Message;
       }
       return null;
    }
