@@ -20,7 +20,7 @@ RtspPlayer player = new RtspPlayer(client, new MediaConsumer() {
    }
 
    @Override
-   public void newChannel(MediaChannel channel)
+   public void createChannel(MediaChannel channel)
    {
       final MediaType type = channel.getType();
       Range<Integer> range = channel.getChannels();
@@ -39,6 +39,12 @@ RtspPlayer player = new RtspPlayer(client, new MediaConsumer() {
             System.out.println(String.format("%s - RTP Sender Report Received", type.name()));
          }
       });
+   }
+
+   @Override
+   public void destroyChannels()
+   {
+      channels.clear();
    }
 
    @Override
