@@ -56,7 +56,7 @@ public class RtspResponse {
 
    static RtspResponse create(List<String> lines)
    {
-      String[] status = lines.remove(0).split("\\s+");
+      String[] status = lines.remove(0).split("\\s+", 3);
       return new RtspResponse(RtspStatus.valueOf(Integer.parseInt(status[1])), status[2], Headers.create(lines));
    }
 
