@@ -104,6 +104,7 @@ public class RtspPlayer {
    {
       if(state == Stopped) {
          state = Activating;
+         sessionId = null;
          session = client.open(new RtspPlaybackHandler(), uri);
 
          SocketOptions.set(session, SO_TIMEOUT, readTimeout);
