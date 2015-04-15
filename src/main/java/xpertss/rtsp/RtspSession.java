@@ -344,7 +344,7 @@ public class RtspSession implements NioSession, DataHandler, ConnectHandler, Che
       } else {
          read.record(result);
          readBuf.flip();
-         while(readBuf.hasRemaining()) {
+         while(readBuf.remaining() > 1) {
             if(lastReader != null) {
                if(lastReader.readFrom(readBuf)) {
                   lastReader = null;

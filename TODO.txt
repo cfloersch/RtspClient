@@ -1,3 +1,11 @@
+I am seeing some 500 Internal Error from the Darwin server. Not sure if
+its because I am sending crap in my request due to an uncleared buffer
+or something. It usually happens right after I lose a connection.
+
+
+
+
+
 Implement an RtspProducer class which does the RTSP ANNOUNCE and
 RTSP RECORD process.
 
