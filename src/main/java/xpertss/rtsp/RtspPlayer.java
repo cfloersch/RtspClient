@@ -12,6 +12,7 @@ import xpertss.net.SocketOptions;
 import xpertss.sdp.MediaDescription;
 import xpertss.sdp.SessionDescription;
 import xpertss.sdp.SessionParser;
+import xpertss.utils.Utils;
 
 import java.io.IOException;
 import java.net.ProtocolException;
@@ -34,12 +35,9 @@ public class RtspPlayer {
    private final MediaConsumer consumer;
    private final RtspClient client;
 
-   private SessionDescription sessionDescription;
-
    private volatile RtspState state = Stopped;
    private RtspSession session;
    private int connectTimeout;
-   private String sessionId;
    private int readTimeout;
    private URI base;
 
@@ -83,7 +81,7 @@ public class RtspPlayer {
 
    public SessionDescription getSessionDescription()
    {
-      return sessionDescription;
+      return getSessionDescription(session);
    }
 
 
@@ -104,7 +102,6 @@ public class RtspPlayer {
    {
       if(state == Stopped) {
          state = Activating;
-         sessionId = null;
          session = client.open(new RtspPlaybackHandler(), uri);
 
          SocketOptions.set(session, SO_TIMEOUT, readTimeout);
@@ -122,7 +119,7 @@ public class RtspPlayer {
          state = Activating;
          RtspRequest request = Play.createRequest(base);
          Headers headers = request.getHeaders();
-         headers.setHeader("Session", sessionId);
+         setSessionId(session, headers);
          headers.setHeader("Range", "npt=0.000-");
          session.execute(request, new DefaultResponseHandler() {
             @Override public void onOkResponse(RtspSession session, RtspResponse response) throws IOException {
@@ -141,7 +138,7 @@ public class RtspPlayer {
          state = Pausing;
          RtspRequest request = Pause.createRequest(base);
          Headers headers = request.getHeaders();
-         headers.setHeader("Session", sessionId);
+         setSessionId(session, headers);
          session.execute(request, new DefaultResponseHandler() {
             @Override public void onOkResponse(RtspSession session, RtspResponse response) throws IOException {
                state = Paused;
@@ -159,7 +156,7 @@ public class RtspPlayer {
          state = Stopping;
          RtspRequest request = Teardown.createRequest(base);
          Headers headers = request.getHeaders();
-         headers.setHeader("Session", sessionId);
+         setSessionId(session, headers);
          headers.setHeader("Connection", "close");
          session.execute(request, new DefaultResponseHandler() {
             @Override public void onOkResponse(RtspSession session, RtspResponse response) throws IOException {
@@ -168,8 +165,6 @@ public class RtspPlayer {
             }
          });
          session = null;
-         sessionId = null;
-         sessionDescription = null;
       }
    }
 
@@ -184,7 +179,7 @@ public class RtspPlayer {
    private void setupChannel(RtspSession session) throws IOException
    {
       final MediaChannel channel = channels.pollFirst();
-      if(channel == null && !Strings.isEmpty(sessionId)) {
+      if(channel == null) {
          startPlayback(session);
       } else {
          String control = channel.getControl();
@@ -196,13 +191,13 @@ public class RtspPlayer {
          headers.setHeader("Transport", String.format(TRANSPORT,
                                                       channels.getLower(),
                                                       channels.getUpper()));
-         if(!Strings.isEmpty(sessionId)) headers.setHeader("Session", sessionId);
+         setSessionId(session, headers);
 
          session.execute(request, new DefaultResponseHandler() {
             @Override
             public void onOkResponse(RtspSession session, RtspResponse response) throws IOException {
                consumer.createChannel(channel);
-               sessionId = Headers.toString(response.getHeaders().getHeader("Session"));
+               session.setAttribute("session.id", Utils.getHeader(response, "Session"));
                setupChannel(session);
             }
          });
@@ -216,7 +211,7 @@ public class RtspPlayer {
    {
       RtspRequest request = Play.createRequest(base);
       Headers headers = request.getHeaders();
-      headers.setHeader("Session", sessionId);
+      setSessionId(session, headers);
       headers.setHeader("Range", "npt=0.000-");
       session.execute(request, new DefaultResponseHandler() {
          @Override public void onOkResponse(RtspSession session, RtspResponse response) throws IOException {
@@ -227,6 +222,18 @@ public class RtspPlayer {
 
 
 
+
+   private static void setSessionId(RtspSession session, Headers headers)
+   {
+      String sessionId = (String) session.getAttribute("session.id");
+      if(!Strings.isEmpty(sessionId)) headers.setHeader("Session", sessionId);
+   }
+
+   private static SessionDescription getSessionDescription(RtspSession session)
+   {
+      return (session == null) ? null : (SessionDescription)
+                     session.getAttribute("session.description");
+   }
 
 
    private class RtspPlaybackHandler implements RtspHandler {
@@ -247,7 +254,8 @@ public class RtspPlayer {
                String contentType = Headers.toString(headers.getHeader("Content-Type"));
                if (Strings.equal("application/sdp", contentType)) {
                   SessionParser parser = new SessionParser();
-                  sessionDescription = parser.parse(response.getEntityBody());
+                  SessionDescription sessionDescription = parser.parse(response.getEntityBody());
+                  session.setAttribute("session.description", sessionDescription);
 
                   MediaDescription[] medias = consumer.select(sessionDescription);
                   if(Objects.isEmpty(medias)) throw new ProtocolException("missing media resource");

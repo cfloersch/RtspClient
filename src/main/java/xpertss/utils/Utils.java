@@ -3,6 +3,8 @@ package xpertss.utils;
 import xpertss.lang.Integers;
 import xpertss.lang.Numbers;
 import xpertss.lang.Strings;
+import xpertss.mime.Headers;
+import xpertss.rtsp.RtspResponse;
 
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
@@ -99,6 +101,12 @@ public class Utils {
    public static int maxIfZero(int value)
    {
       return (value == 0) ? Integer.MAX_VALUE : value;
+   }
+
+
+   public static String getHeader(RtspResponse response, String name)
+   {
+      return Headers.toString(response.getHeaders().getHeader(name));
    }
 
 }
