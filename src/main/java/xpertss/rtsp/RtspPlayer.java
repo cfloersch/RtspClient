@@ -297,8 +297,6 @@ public class RtspPlayer {
 
    }
 
-
-
    private static class DefaultResponseHandler implements RtspResponseHandler {
 
       @Override public void onResponse(RtspSession session, RtspResponse response) throws IOException {
@@ -311,4 +309,5 @@ public class RtspPlayer {
       {
       }
    }
+
 }
