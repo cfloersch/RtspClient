@@ -12,6 +12,7 @@ import xpertss.net.SocketOptions;
 import xpertss.sdp.MediaDescription;
 import xpertss.sdp.SessionDescription;
 import xpertss.sdp.SessionParser;
+import xpertss.utils.SafeProxy;
 import xpertss.utils.Utils;
 
 import java.io.IOException;
@@ -46,7 +47,8 @@ public class RtspPlayer {
    public RtspPlayer(RtspClient client, MediaConsumer consumer)
    {
       this.client = Objects.notNull(client);
-      this.consumer = Objects.notNull(consumer);
+      this.consumer = SafeProxy.newInstance(MediaConsumer.class,
+                                    Objects.notNull(consumer));
    }
 
 
