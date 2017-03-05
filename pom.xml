@@ -6,7 +6,7 @@
 
     <groupId>xpertss</groupId>
     <artifactId>rtsp-client</artifactId>
-    <version>1.0</version>
+    <version>1.0.1</version>
 
 
    <licenses>
@@ -107,12 +107,12 @@
         <dependency>
             <groupId>xpertss</groupId>
             <artifactId>sdp</artifactId>
-            <version>1.1</version>
+            <version>1.1.1</version>
         </dependency>
         <dependency>
             <groupId>xpertss</groupId>
             <artifactId>stdlib</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.6</version>
         </dependency>
 
 
