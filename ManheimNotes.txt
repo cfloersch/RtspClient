@@ -1,0 +1,7 @@
+So I noticed that I am receiving a sender report for each stream roughly every 5
+seconds (give or take 10 ms). The sender report for video appears to be offset
+behind audio by roughly 1.5 seconds.
+
+
+It does not appear that Darwin honors the Connection: close header when passed
+from the client.
