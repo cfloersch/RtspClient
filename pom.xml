@@ -109,11 +109,6 @@
             <artifactId>sdp</artifactId>
             <version>1.1.1</version>
         </dependency>
-        <dependency>
-            <groupId>xpertss</groupId>
-            <artifactId>stdlib</artifactId>
-            <version>1.0.6</version>
-        </dependency>
 
 
         <dependency>
