@@ -105,9 +105,9 @@
             <version>1.2.17</version>
         </dependency>
         <dependency>
-            <groupId>xpertss</groupId>
+            <groupId>org.xpertss</groupId>
             <artifactId>sdp</artifactId>
-            <version>1.1.1</version>
+            <version>1.1.2</version>
         </dependency>
 
 
