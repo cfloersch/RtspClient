@@ -1,14 +1,12 @@
 package xpertss.rtsp;
 
 import org.junit.Test;
-import xpertss.function.Consumer;
 import xpertss.lang.Range;
 import xpertss.media.MediaChannel;
 import xpertss.media.MediaConsumer;
 import xpertss.media.MediaType;
 import xpertss.sdp.MediaDescription;
 import xpertss.sdp.SessionDescription;
-import xpertss.threads.Threads;
 
 import java.net.ConnectException;
 import java.net.URI;
@@ -17,6 +15,8 @@ import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
+
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
@@ -118,7 +118,7 @@ public class RtspClientTest {
             Range<Integer> range = channel.getChannels();
             channels.put(range.getLower(), new Consumer<ByteBuffer>() {
                long start = System.nanoTime();
-               @Override public void apply(ByteBuffer data) {
+               @Override public void accept(ByteBuffer data) {
                   long millis = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - start);
                   int seq = (int) (data.getShort(2) & 0xffff);
                   long ts = (long) (data.getInt(4) & 0xffffffff);
@@ -127,7 +127,7 @@ public class RtspClientTest {
             });
             channels.put(range.getUpper(), new Consumer<ByteBuffer>() {
                @Override
-               public void apply(ByteBuffer byteBuffer) {
+               public void accept(ByteBuffer byteBuffer) {
                   System.out.println(String.format("%s - RTP Sender Report Received", type.name()));
                }
             });
@@ -145,7 +145,7 @@ public class RtspClientTest {
          {
             Consumer<ByteBuffer> handler = channels.get(channelId);
             if(handler == null)  System.out.println(String.format("Received packet on unknown channel %d", channelId));
-            else handler.apply(data);
+            else handler.accept(data);
          }
 
          @Override

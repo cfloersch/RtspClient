@@ -5,7 +5,6 @@
  */
 package xpertss.mime;
 
-import xpertss.function.Predicate;
 import xpertss.function.Predicates;
 import xpertss.lang.Integers;
 import xpertss.lang.Objects;
@@ -16,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.function.Predicate;
 
 
 /**
@@ -412,7 +412,7 @@ public class Headers {
       {
          while(i < src.size()) {
             Header header = src.get(i++);
-            if(!filter.apply(header)) return header;
+            if(!filter.test(header)) return header;
          }
          return null;
       }
