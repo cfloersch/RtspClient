@@ -1,7 +1,8 @@
 package xpertss.rtsp;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import xpertss.io.Buffers;
 import xpertss.io.NIOUtils;
 import xpertss.lang.Booleans;
@@ -70,7 +71,7 @@ public class RtspSession implements NioSession, DataHandler, ConnectHandler, Che
    private final ByteBuffer readBuf = ByteBuffer.allocate(8192);
    private final long createTime = System.currentTimeMillis();
    private final ReadManager readManager = new ReadManager();
-   private final Log log = LogFactory.getLog(getClass());
+   private final Logger log = LoggerFactory.getLogger(getClass());
    private final NioStats write = new NioStats();
    private final NioStats read = new NioStats();
    private final SocketAddress address;
@@ -367,7 +368,7 @@ public class RtspSession implements NioSession, DataHandler, ConnectHandler, Che
                } else {
                   // We probably should have some sort of ResponseReader here
                   String str = Buffers.toHexString(readBuf, readBuf.position(), Math.min(readBuf.remaining(), 10));
-                  log.fatal("Unexpected data: " + str);
+                  log.error("Unexpected data: " + str);
                   throw new ProtocolException("unexpected read received");
                }
             }

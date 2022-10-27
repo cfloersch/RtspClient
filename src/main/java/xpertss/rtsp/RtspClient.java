@@ -1,7 +1,7 @@
 package xpertss.rtsp;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import xpertss.lang.Objects;
 import xpertss.nio.NioProvider;
 import xpertss.nio.NioReactor;
@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 public class RtspClient {
 
 
-   private Log log = LogFactory.getLog(getClass());
+   private Logger log = LoggerFactory.getLogger(getClass());
 
    // Product name OS/version Java/version
    private final NioReactor reactor;
