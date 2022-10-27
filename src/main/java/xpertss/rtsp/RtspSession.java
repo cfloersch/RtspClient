@@ -356,12 +356,16 @@ public class RtspSession implements NioSession, DataHandler, ConnectHandler, Che
                   lastReader = null;
                }
             } else {
+               // TODO We need to be prepared for a spontaneous RTSP Response block
+               // while reading channelized data. This might for example be the sever
+               // telling us it is timing out our session due to lack of keep alive.
                lastReader = readers.poll();
                if(lastReader != null) {
                   if (lastReader.readFrom(readBuf)) {
                      lastReader = null;
                   }
                } else {
+                  // We probably should have some sort of ResponseReader here
                   String str = Buffers.toHexString(readBuf, readBuf.position(), Math.min(readBuf.remaining(), 10));
                   log.fatal("Unexpected data: " + str);
                   throw new ProtocolException("unexpected read received");
@@ -647,12 +651,12 @@ public class RtspSession implements NioSession, DataHandler, ConnectHandler, Che
       public boolean readFrom(ByteBuffer src) throws IOException
       {
          if(data == null) {
-            if (readBuf.get() != 0x24) throw new ProtocolException("expected interleaved data");
-            channelId = readBuf.get();
-            int len = readBuf.getShort();
+            if (src.get() != 0x24) throw new ProtocolException("expected interleaved data");
+            channelId = src.get();
+            int len = src.getShort();
             data = ByteBuffer.allocate(len);
          }
-         Buffers.copyTo(readBuf, data);
+         Buffers.copyTo(src, data);
          if (data.hasRemaining()) return false;
          data.flip();
          handler.onData(RtspSession.this, channelId, data.asReadOnlyBuffer());
