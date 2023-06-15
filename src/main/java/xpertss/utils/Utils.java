@@ -3,6 +3,7 @@ package xpertss.utils;
 import xpertss.lang.Integers;
 import xpertss.lang.Numbers;
 import xpertss.lang.Strings;
+import xpertss.mime.Header;
 import xpertss.mime.Headers;
 import xpertss.rtsp.RtspResponse;
 
@@ -109,4 +110,9 @@ public class Utils {
       return Headers.toString(response.getHeaders().getHeader(name));
    }
 
+   public static String getBaseHeader(RtspResponse response, String name)
+   {
+      Header header = response.getHeaders().getHeader(name);
+      return header.getValue(0).getValue();
+   }
 }

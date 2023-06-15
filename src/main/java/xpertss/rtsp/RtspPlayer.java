@@ -7,6 +7,8 @@ import xpertss.lang.Range;
 import xpertss.lang.Strings;
 import xpertss.media.MediaChannel;
 import xpertss.media.MediaConsumer;
+import xpertss.mime.Header;
+import xpertss.mime.HeaderValue;
 import xpertss.mime.Headers;
 import xpertss.net.SocketOptions;
 import xpertss.sdp.MediaDescription;
@@ -199,7 +201,7 @@ public class RtspPlayer {
             @Override
             public void onOkResponse(RtspSession session, RtspResponse response) throws IOException {
                consumer.createChannel(channel);
-               session.setAttribute("session.id", Utils.getHeader(response, "Session"));
+               session.setAttribute("session.id", Utils.getBaseHeader(response, "Session"));
                setupChannel(session);
             }
          });

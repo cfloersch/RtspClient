@@ -6,7 +6,7 @@
 
     <groupId>xpertss</groupId>
     <artifactId>rtsp-client</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 
 
    <licenses>
@@ -94,18 +94,7 @@
 
 
     <dependencies>
-       <!--
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
-        </dependency>
-        -->
+
        <dependency>
           <groupId>org.slf4j</groupId>
           <artifactId>slf4j-api</artifactId>
@@ -114,7 +103,7 @@
         <dependency>
             <groupId>org.xpertss</groupId>
             <artifactId>sdp</artifactId>
-            <version>1.1.2</version>
+            <version>1.1.3</version>
         </dependency>
 
 
@@ -127,7 +116,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.13.1</version>
+            <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>

@@ -79,4 +79,17 @@ public class HeadersTest {
       assertEquals(1, headers.remove("User-Agent"));
    }
 
+   @Test
+   public void testHeaderParameters()
+   {
+      Headers headers = new Headers(Headers.Type.Rtsp);
+      headers.setIfNotSet("Session", "rzRIqDVnQVDRTppy;timeout=60");
+
+      Header header = headers.getHeader("Session");
+      assertEquals("rzRIqDVnQVDRTppy; timeout=60", Headers.toString(header));
+      assertEquals("rzRIqDVnQVDRTppy", header.getValue(0).getValue());
+      assertEquals("60", header.getValue(0).getParameter("timeout").getValue());
+   }
+
+
 }

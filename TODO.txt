@@ -1,3 +1,32 @@
 Implement an RtspProducer class which does the RTSP ANNOUNCE and
 RTSP RECORD process.
 
+Add support for Basic and Digest Auth
+
+Add support for UDP transports
+
+Add support for periodic Get_Parameter calls (Keep ALives)
+
+Add support for Sender and Receiver Reports RTCP
+
+Add better support for various RTSP Headers
+  Transport as an Example
+
+Improve support for SessionDescription
+  RtpMap is just the beginning
+
+Add support for random server response (beyond just data packets)
+  Example: Session timeouts
+
+Add Options call to start of connection process to determine if all needed
+  methods are supported.
+
+  OPTIONS rtsp://10.148.88.111:554/axis-media/media.amp RTSP/1.0
+  CSeq: 1
+  User-Agent: Lavf57.83.100
+
+  RTSP/1.0 200 OK
+  CSeq: 1
+  Public: OPTIONS, DESCRIBE, ANNOUNCE, GET_PARAMETER, PAUSE, PLAY, RECORD, SETUP, SET_PARAMETER, TEARDOWN
+  Server: GStreamer RTSP server
+  Date: Mon, 04 Apr 2022 12:35:49 GMT
